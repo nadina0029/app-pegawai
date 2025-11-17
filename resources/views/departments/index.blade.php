@@ -4,36 +4,36 @@
 @section('page-title', 'Daftar Departemen')
 
 @section('content')
-    <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-700 bg-gray-800 rounded-lg shadow-md">
-            <thead class="bg-gray-700 text-gray-300">
-                <tr>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Nama Departemen</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-700 text-gray-100">
-                @foreach($departments as $department)
-                    <tr class="hover:bg-gray-700/50 transition">
-                        <td class="px-4 py-2">{{ $department->nama_departemen }}</td>
-                        <td class="px-4 py-2 space-x-2">
-                            <a href="{{ route('departments.show', $department->id) }}" class="text-indigo-400 hover:underline">Detail</a>
-                            <a href="{{ route('departments.edit', $department->id) }}" class="text-yellow-400 hover:underline">Edit</a>
-                            <form action="{{ route('departments.destroy', $department->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin ingin menghapus?')" class="text-red-400 hover:underline">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    @foreach($departments as $department)
+    <div class="bg-white text-black rounded-lg shadow-md p-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-building text-wblack text-base"></i>
+                <span class="text-base font-semibold">{{ $department->nama_departemen }}</span>
+            </div>
+            <div class="flex items-center gap-3 text-base">
+                <a href="{{ route('departments.show', $department->id) }}" class="text-black hover:text-gray-400" title="Detail">
+                    <i class="fas fa-eye"></i>
+                </a>
+                <a href="{{ route('departments.edit', $department->id) }}" class="text-black hover:text-gray-400" title="Edit">
+                    <i class="fas fa-pen-to-square"></i>
+                </a>
+                <form action="{{ route('departments.destroy', $department->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')" class="inline">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="text-black hover:text-gray-400" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
+    @endforeach
+</div>
 
-    <a href="{{ route('departments.create') }}"
-       class="w-14 h-14 text-center fixed bottom-15 right-10 bg-white hover:bg-gray-600 text-black rounded-full p-4 shadow-lg transition duration-300"
-       title="Tambah Departemen">
-        <i class="fas fa-plus text-xl"></i>
-    </a>
+<a href="{{ route('departments.create') }}"
+    class="w-14 h-14 flex items-center justify-center fixed bottom-24 right-10 bg-white hover:bg-gray-200 text-black rounded-full shadow-lg transition duration-300"
+    title="Tambah Departemen">
+    <i class="fas fa-plus text-xl"></i>
+</a>
 @endsection

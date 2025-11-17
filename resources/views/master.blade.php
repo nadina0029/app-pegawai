@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-900">
+<html lang="en" class="bg-white">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
 <body class="flex flex-col min-h-screen text-gray-100">
 
     {{-- Navbar --}}
-    <nav class="bg-gray-800/50">
+    <nav class="bg-gray-800">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
 
@@ -85,9 +85,9 @@
     </nav>
 
     {{-- Header --}}
-    <header class="bg-gray-800 border-y border-white/10">
+    <header class="bg-gray-200 border-y border-white/10">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold tracking-tight text-white">@yield('page-title', 'Dashboard')</h1>
+            <h1 class="text-3xl font-bold tracking-tight text-black">@yield('page-title', 'Dashboard')</h1>
         </div>
     </header>
 

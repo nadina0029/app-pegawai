@@ -4,20 +4,19 @@
 @section('page-title', 'Informasi Departemen')
 
 @section('content')
-    <div class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg shadow-md">
-        <table class="min-w-full divide-y divide-gray-700">
-            <tbody class="divide-y divide-gray-700 text-gray-100">
-                <tr>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-300 w-1/3">Nama Departemen</th>
-                    <td class="px-4 py-3">{{ $department->nama_departemen }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="mt-6 text-right">
-            <a href="{{ route('departments.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">
-                Kembali ke Daftar Departemen
-            </a>
+<div class="max-w-xl mx-auto bg-gray-500 text-white p-6 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:shadow-lg">
+    <div class="flex items-center gap-4 mb-6">
+        <i class="fas fa-building text-white text-3xl"></i>
+        <div>
+            <p class="text-white text-base">{{ $department->nama_departemen }}</p>
         </div>
     </div>
+
+    <div class="mt-6 text-right">
+        <a href="{{ route('departments.index') }}"
+           class="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-black hover:text-white text-black text-sm font-medium rounded-md transition">
+            <i class="fas fa-arrow-left text-sm"></i> Kembali
+        </a>
+    </div>
+</div>
 @endsection
