@@ -38,7 +38,7 @@
                 </a>
 
                 <button type="submit"
-                        class="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all transform hover:scale-105">
+                        class="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all transform hover:scale-105">
                     <i class="fas fa-save"></i> Simpan Data
                 </button>
             </div>

@@ -12,10 +12,10 @@
     {{-- Kiri: Teks dan Tombol --}}
     <div class="flex-1 z-10 text-center lg:text-left order-2 lg:order-1">
         <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
-            Sistem Manajemen Pegawai <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Modern & Terintegrasi</span>
+            <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Sistem Manajemen Pegawai</span>
         </h2>
-        <p class="text-slate-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed text-lg">
-            Pantau kinerja tim, kelola administrasi, dan akses data real-time dalam satu platform yang dirancang untuk efisiensi.
+        <p class="text-white mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed text-lg">
+            Akses daftar dan tambahkan Pegawai, Departemen, Jabatan, Absensi, dan Gaji. Tambahkan juga Agenda di Kalender
         </p>
 
         {{-- Tombol Scroll ke Bawah --}}
@@ -26,7 +26,6 @@
 
     {{-- Kanan: Gambar Lokal --}}
     <div class="flex-1 flex justify-center z-10 order-1 lg:order-2">
-        {{-- UBAH DISINI: Saya ganti 'max-w-lg' jadi 'max-w-sm' agar gambar lebih kecil & proporsional --}}
         <div class="relative w-full max-w-sm p-4">
             
             {{-- Gambar dengan efek Blending --}}
@@ -42,31 +41,32 @@
     </div>
 </div>
 
-{{-- Features Grid (TIDAK BERUBAH) --}}
+{{-- Features Grid --}}
 <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 scroll-mt-32">
     @php
-    $features = [
-    ['title' => 'Manajemen Pegawai', 'desc' => 'Database lengkap pegawai aktif.', 'icon' => 'fas fa-users', 'url' => '/employees', 'color' => 'text-cyan-400', 'bg' => 'bg-cyan-500/10', 'border' => 'border-cyan-500/20'],
-    ['title' => 'Departemen', 'desc' => 'Struktur divisi perusahaan.', 'icon' => 'fas fa-building', 'url' => '/departments', 'color' => 'text-purple-400', 'bg' => 'bg-purple-500/10', 'border' => 'border-purple-500/20'],
-    ['title' => 'Jabatan', 'desc' => 'Posisi dan jenjang karir.', 'icon' => 'fas fa-briefcase', 'url' => '/positions', 'color' => 'text-emerald-400', 'bg' => 'bg-emerald-500/10', 'border' => 'border-emerald-500/20'],
-    ['title' => 'Absensi', 'desc' => 'Monitor kehadiran realtime.', 'icon' => 'fas fa-clock', 'url' => '/attendances', 'color' => 'text-amber-400', 'bg' => 'bg-amber-500/10', 'border' => 'border-amber-500/20'],
-    ['title' => 'Gaji & Tunjangan', 'desc' => 'Laporan payroll otomatis.', 'icon' => 'fas fa-wallet', 'url' => '/salaries', 'color' => 'text-rose-400', 'bg' => 'bg-rose-500/10', 'border' => 'border-rose-500/20'],
-    ['title' => 'Kalender Event', 'desc' => 'Jadwal kegiatan kantor.', 'icon' => 'fas fa-calendar-day', 'url' => route('events.index'), 'color' => 'text-blue-400', 'bg' => 'bg-blue-500/10', 'border' => 'border-blue-500/20'],
-    ];
+        $features = [
+            ['title' => 'Manajemen Pegawai', 'desc' => 'Database lengkap pegawai aktif.', 'icon' => 'fas fa-users', 'url' => '/employees', 'color' => 'text-blue-400', 'bg' => 'bg-blue-500/10', 'border' => 'border-blue-500/20'],
+            ['title' => 'Departemen', 'desc' => 'Struktur divisi perusahaan.', 'icon' => 'fas fa-building', 'url' => '/departments', 'color' => 'text-purple-400', 'bg' => 'bg-purple-500/10', 'border' => 'border-purple-500/20'],
+            ['title' => 'Jabatan', 'desc' => 'Posisi dan jenjang karir.', 'icon' => 'fas fa-briefcase', 'url' => '/positions', 'color' => 'text-emerald-400', 'bg' => 'bg-emerald-500/10', 'border' => 'border-emerald-500/20'],
+            ['title' => 'Absensi', 'desc' => 'Monitor kehadiran realtime.', 'icon' => 'fas fa-clock', 'url' => '/attendances', 'color' => 'text-amber-400', 'bg' => 'bg-amber-500/10', 'border' => 'border-amber-500/20'],
+            ['title' => 'Gaji & Tunjangan', 'desc' => 'Laporan payroll otomatis.', 'icon' => 'fas fa-wallet', 'url' => '/salaries', 'color' => 'text-rose-400', 'bg' => 'bg-rose-500/10', 'border' => 'border-rose-500/20'],
+            // DIPERBAIKI: Menambahkan tanda kutip pada '/company-events'
+            ['title' => 'Kalender Event', 'desc' => 'Jadwal kegiatan kantor.', 'icon' => 'fas fa-calendar-day', 'url' => '/company-events', 'color' => 'text-cyan-400', 'bg' => 'text-cyan-500/10', 'border' => 'text-cyan-500/20'],
+        ];
     @endphp
 
     @foreach ($features as $feature)
     <a href="{{ url($feature['url']) }}"
-        class="group relative glass-panel p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:bg-slate-800/80">
-
+       class="group relative glass-panel p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:bg-slate-800/80">
+        
         <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <i class="fas fa-arrow-right text-slate-400"></i>
+             <i class="fas fa-arrow-right text-slate-400"></i>
         </div>
 
         <div class="w-14 h-14 rounded-xl {{ $feature['bg'] }} {{ $feature['border'] }} border flex items-center justify-center mb-4 transition-transform group-hover:scale-110 group-hover:rotate-3">
             <i class="{{ $feature['icon'] }} text-2xl {{ $feature['color'] }}"></i>
         </div>
-
+        
         <h3 class="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">{{ $feature['title'] }}</h3>
         <p class="text-sm text-slate-400 leading-relaxed">{{ $feature['desc'] }}</p>
     </a>

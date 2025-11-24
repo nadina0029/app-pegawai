@@ -75,7 +75,7 @@
 
 {{-- Floating Action Button (FAB) --}}
 <a href="{{ route('departments.create') }}"
-   class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full shadow-[0_0_20px_rgba(79,70,229,0.5)] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-90"
+   class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-purple-600 hover:bg-purple-500 text-white rounded-full shadow-[0_0_20px_rgba(79,70,229,0.5)] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-90"
    title="Tambah Departemen">
     <i class="fas fa-plus text-xl"></i>
 </a>

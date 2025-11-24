@@ -17,6 +17,5 @@ Route::resource('departments',DepartmenController::class);
 Route::resource('positions',PositionController::class);
 Route::resource('attendances',AttendanceController::class);
 Route::resource('salaries',SalariesController::class);
-Route::get('/kalender', [CompanyEventController::class, 'index'])->name('events.index');
-Route::get('/api/events', [CompanyEventController::class, 'fetch']);
-Route::post('/kalender/store', [CompanyEventController::class, 'store']);
+Route::get('/api/company-events', [CompanyEventController::class, 'fetchEvents'])->name('company-events.api');
+Route::resource('company-events', CompanyEventController::class);

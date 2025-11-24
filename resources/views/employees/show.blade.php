@@ -15,7 +15,7 @@
         
         {{-- 1. Banner Atas (Gradient) --}}
         <div class="h-40 bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 relative">
-            <div class="absolute inset-0 bg-pattern opacity-10"></div> {{-- Opsional: Pattern --}}
+            <div class="absolute inset-0 bg-pattern opacity-10"></div>
         </div>
 
         <div class="px-8 pb-8">
@@ -140,8 +140,74 @@
                         </div>
                     </div>
                 </div>
+            </div> {{-- End Grid MD:grid-cols-2 --}}
 
+            {{-- START: INFORMASI GAJI (Tambahan Baru) --}}
+            @if($employee->salary) {{-- Cek apakah data gaji ada --}}
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-white mb-4 border-b border-rose-500/20 pb-2 flex items-center gap-2">
+                    <i class="fas fa-wallet text-rose-400"></i> Informasi Gaji Terkini
+                </h3>
+                
+                {{-- BULAN DAN TAHUN GAJI (BARU) --}}
+                <p class="text-slate-400 text-sm mb-4 flex items-center gap-2">
+                    <i class="fas fa-calendar-alt text-rose-300"></i>
+                    Periode: 
+                    <span class="font-mono text-white font-bold">
+                        @php
+                            $salaryDate = $employee->salary->bulan;
+                            try {
+                                // Coba parse format standar (Y-m, Y-m-d)
+                                $periodDate = \Carbon\Carbon::parse($salaryDate);
+                            } catch (\Exception $e) {
+                                // Fallback: Coba format non-standar m-Y (misal: 11-2025)
+                                $periodDate = \Carbon\Carbon::createFromFormat('m-Y', $salaryDate);
+                            }
+                        @endphp
+                        {{ $periodDate->translatedFormat('F Y') }}
+                    </span>
+                </p>
+                {{-- END BULAN DAN TAHUN GAJI --}}
+
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    {{-- Gaji Pokok --}}
+                    <div class="p-4 rounded-xl bg-rose-500/5 border border-rose-500/10">
+                        <p class="text-xs text-slate-400 uppercase">Gaji Pokok</p>
+                        <p class="text-xl font-mono text-white font-bold mt-1">
+                            Rp {{ number_format($employee->salary->gaji_pokok ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+
+                    {{-- Tunjangan/Potongan --}}
+                    <div class="p-4 rounded-xl bg-rose-500/5 border border-rose-500/10">
+                        <p class="text-xs text-slate-400 uppercase">Tunjangan / Potongan</p>
+                        <p class="text-base font-mono text-emerald-400">
+                             + Rp {{ number_format($employee->salary->tunjangan ?? 0, 0, ',', '.') }}
+                        </p>
+                        <p class="text-base font-mono text-rose-400">
+                            - Rp {{ number_format($employee->salary->potongan ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+
+                    {{-- Total Gaji Bersih --}}
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-rose-600/90 to-pink-600/90 shadow-lg shadow-rose-500/30">
+                        <p class="text-xs text-white/80 uppercase">Take Home Pay</p>
+                        <p class="text-2xl font-mono text-white font-bold mt-1">
+                            Rp {{ number_format($employee->salary->total_gaji ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+                </div>
             </div>
+            @else
+            {{-- State jika data gaji tidak ditemukan --}}
+            <div class="mt-8 p-6 rounded-2xl bg-slate-800/50 border border-white/10 text-center">
+                <i class="fas fa-info-circle text-rose-400 mb-2"></i>
+                <p class="text-slate-400 text-sm">Data gaji terkini pegawai ini belum tercatat.</p>
+            </div>
+            @endif
+            {{-- END: INFORMASI GAJI --}}
 
             {{-- 4. Footer Tombol --}}
             <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-center">
@@ -149,6 +215,20 @@
                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition font-medium">
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
+
+                <div class="flex gap-3">
+                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                        @csrf @method('DELETE')
+                        <button type="submit"
+                                class="w-10 h-10 flex items-center justify-center rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white transition" title="Hapus Pegawai">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                    <a href="{{ route('employees.edit', $employee->id) }}"
+                       class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition hover:-translate-y-1">
+                        <i class="fas fa-edit"></i> Edit Profil
+                    </a>
+                </div>
             </div>
 
         </div>

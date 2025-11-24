@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Position;
+use App\Models\Salaries;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -53,9 +54,12 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
+    // app/Http/Controllers/EmployeeController.php
+
     public function show(string $id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::with(['departemen', 'jabatan', 'salary'])->findOrFail($id);
+
         return view('employees.show', compact('employee'));
     }
 

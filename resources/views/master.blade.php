@@ -48,7 +48,7 @@
                         ['name' => 'Position', 'url' => '/positions'],
                         ['name' => 'Attendance', 'url' => '/attendances'],
                         ['name' => 'Salaries', 'url' => '/salaries'],
-                        ['name' => 'Kalender', 'url' => route('events.index'), 'icon' => 'fas fa-calendar-alt'],
+                        ['name' => 'Kalender', 'url' => '/company-events', 'icon' => 'fas fa-calendar-alt'],
                         ];
                         @endphp
 
@@ -65,27 +65,27 @@
                     </div>
                 </div>
 
-{{-- Profile Link (Direct ke Instagram) --}}
+                {{-- Profile Link (Direct ke Instagram) --}}
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
                         {{-- Ganti href dengan link Instagram kamu --}}
-                        <a href="https://instagram.com/USERNAME_KAMU" target="_blank" 
-                           class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            
+                        <a href="https://instagram.com/nadina_btb" target="_blank"
+                            class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+
                             <div class="text-right hidden lg:block">
                                 {{-- BAGIAN INI YANG DIUBAH --}}
                                 <p class="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">
                                     NANAD
                                 </p>
                                 <p class="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">
-                                    App Creator & Developer
+                                    Developer
                                 </p>
                             </div>
 
                             <div class="relative">
                                 <img src="https://i.pinimg.com/736x/e1/40/0f/e1400f761873670001eb65b5fba5556f.jpg"
-                                     class="h-10 w-10 rounded-full border-2 border-slate-700 group-hover:border-indigo-500 transition-all object-cover shadow-lg group-hover:shadow-indigo-500/20">
-                                
+                                    class="h-10 w-10 rounded-full border-2 border-slate-700 group-hover:border-indigo-500 transition-all object-cover shadow-lg group-hover:shadow-indigo-500/20">
+
                                 {{-- Badge Ikon Instagram Kecil --}}
                                 <div class="absolute -bottom-1 -right-1 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-950">
                                     <i class="fab fa-instagram text-white text-[10px]"></i>
@@ -137,7 +137,7 @@
     {{-- Footer --}}
     <footer class="border-t border-white/5 bg-slate-950 py-6 mt-auto">
         <div class="text-center text-slate-500 text-sm">
-            &copy; {{ date('Y') }} <span class="text-indigo-500 font-medium">App Pegawai</span>. Crafted with <i class="fas fa-heart text-red-500 mx-1"></i> for excellence.
+            &copy; {{ date('Y') }} <span class="text-indigo-500 font-medium">App Pegawai
         </div>
     </footer>
 

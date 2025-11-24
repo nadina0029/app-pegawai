@@ -7,80 +7,87 @@ use Illuminate\Http\Request;
 
 class CompanyEventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Halaman Index (Mengembalikan View)
     public function index()
     {
-        return view('events.index');
+        return view('company_events.index');
     }
 
-    public function fetch()
+    // FUNGSI KHUSUS UNTUK FULLCALENDAR API (Mengembalikan JSON)
+    public function fetchEvents()
     {
-        return \App\Models\CompanyEvent::all()->map(function ($event) {
+        // 1. Ambil data
+        $data = CompanyEvent::all();
+
+        // 2. Mapping dan Formatting
+        $events = $data->map(function($event) {
+            
+            // PERBAIKAN: Mengandalkan $casts di Model, HAPUS parse() yang konflik
+            // Data sudah menjadi objek Carbon (berkat $casts di Model)
+            $start = ($event->tanggal_mulai) 
+                ? $event->tanggal_mulai->format('Y-m-d\TH:i:s') 
+                : null;
+            $end   = ($event->tanggal_selesai) 
+                ? $event->tanggal_selesai->format('Y-m-d\TH:i:s') 
+                : null;
+
             return [
                 'id' => $event->id,
                 'title' => $event->judul,
-                'start' => $event->tanggal_mulai,
-                'end' => $event->tanggal_selesai,
-                'color' => $event->warna ?? '#6366f1',
+                'start' => $start,
+                'end'   => $end,
+                'color' => $event->warna,
+                'lokasi' => $event->lokasi,
+                'deskripsi' => $event->deskripsi,
             ];
         });
+
+        return response()->json($events);
+    }
+    
+    // FUNGSI LAINNYA (dibiarkan sama)
+    public function create(Request $request)
+    {
+        $date = $request->query('date');
+        return view('company_events.create', compact('date'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-            'lokasi' => 'nullable|string|max:255',
-            'warna' => 'nullable|string|max:7',
         ]);
 
         CompanyEvent::create($request->all());
 
-        return response()->json(['success' => true]);
+        return redirect()->route('company-events.index')->with('success', 'Agenda berhasil ditambahkan');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $companyEvent = CompanyEvent::findOrFail($id);
+        return view('company_events.show', compact('companyEvent'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CompanyEvent $companyEvent)
+    public function edit($id)
     {
-        //
+        $companyEvent = CompanyEvent::findOrFail($id);
+        return view('company_events.edit', compact('companyEvent'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CompanyEvent $companyEvent)
+    public function update(Request $request, $id)
     {
-        //
+        $companyEvent = CompanyEvent::findOrFail($id);
+        $companyEvent->update($request->all());
+        return redirect()->route('company-events.index')->with('success', 'Agenda berhasil diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, CompanyEvent $companyEvent)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CompanyEvent $companyEvent)
-    {
-        //
+        $companyEvent = CompanyEvent::findOrFail($id);
+        $companyEvent->delete();
+        return redirect()->route('company-events.index')->with('success', 'Agenda berhasil dihapus');
     }
 }

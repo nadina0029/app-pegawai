@@ -13,7 +13,7 @@ class SalariesController extends Controller
      */
     public function index()
     {
-        $salaries = Salaries::latest()->paginate(5);
+        $salaries = Salaries::latest()->get();
         return view('salaries.index', compact('salaries'));
     }
 
@@ -48,8 +48,8 @@ class SalariesController extends Controller
      */
     public function show(string $id)
     {
-        $salaries = Salaries::with('employee')->findOrFail($id);
-        return view('salaries.show', compact('salaries'));
+        $salary = Salaries::with('employee')->findOrFail($id);
+        return view('salaries.show', compact('salary'));
     }
 
     /**
