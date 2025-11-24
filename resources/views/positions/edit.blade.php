@@ -4,41 +4,76 @@
 @section('page-title', 'Ubah Data Jabatan')
 
 @section('content')
-<form action="{{ route('positions.update', $position->id) }}" method="POST"
-      class="max-w-xl mx-auto bg-white text-gray-800 p-6 rounded-lg shadow-md space-y-6 transition-all duration-300 hover:shadow-lg">
-    @csrf
-    @method('PUT')
+<div class="max-w-2xl mx-auto mt-6">
+    <form action="{{ route('positions.update', $position->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-    <div>
-        <label for="nama_jabatan" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-user-tie mr-1 text-indigo-600"></i> Nama Jabatan
-        </label>
-        <input type="text" name="nama_departemen" id="nama_departemen"
-               value="{{ old('nama_departemen', $position->nama_departemen) }}"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"
-               placeholder="Contoh: Music Director">
-    </div>
+        <div class="glass-panel rounded-3xl p-10 border border-white/10 relative overflow-hidden">
+            
+            {{-- Dekorasi Cahaya Latar (Sedikit berbeda: Amber & Emerald untuk Edit) --}}
+            <div class="absolute top-0 right-0 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl -z-10"></div>
 
-    <div>
-        <label for="gaji_pokok" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-money-bill-wave mr-1 text-indigo-600"></i> Gaji Pokok
-        </label>
-        <input type="number" name="gaji_pokok" id="gaji_pokok"
-               value="{{ old('gaji_pokok', $position->gaji_pokok) }}"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"
-               placeholder="Contoh: 35000000">
-    </div>
+            {{-- Input Fields --}}
+            <div class="space-y-8">
+                
+                {{-- Nama Jabatan --}}
+                <div>
+                    <label for="nama_departemen" class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 ml-1">
+                        Nama Jabatan
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-id-card-alt text-slate-500 group-focus-within:text-emerald-400 transition-colors"></i>
+                        </div>
+                        <input type="text" id="nama_departemen" name="nama_departemen"
+                               value="{{ old('nama_departemen', $position->nama_departemen) }}"
+                               class="glass-input w-full rounded-2xl pl-12 py-4 text-lg focus:ring-2 focus:ring-emerald-500 transition-all placeholder-slate-600"
+                               required>
+                    </div>
+                </div>
 
-    <div class="flex justify-between items-center">
-        <a href="{{ route('positions.index') }}"
-           class="inline-flex items-center gap-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium rounded-md transition">
-            <i class="fas fa-arrow-left text-sm"></i> Batal
-        </a>
+                {{-- Gaji Pokok --}}
+                <div>
+                    <label for="gaji_pokok" class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 ml-1">
+                        Gaji Pokok
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="text-slate-400 font-bold group-focus-within:text-emerald-400 transition-colors">Rp</span>
+                        </div>
+                        <input type="number" id="gaji_pokok" name="gaji_pokok"
+                               value="{{ old('gaji_pokok', $position->gaji_pokok) }}"
+                               class="glass-input w-full rounded-2xl pl-12 py-4 text-lg font-mono focus:ring-2 focus:ring-emerald-500 transition-all placeholder-slate-600 tracking-wide appearance-none"
+                               required>
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <span class="text-xs text-slate-500">/ Bulan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <button type="submit"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">
-            <i class="fas fa-save text-sm"></i> Update
-        </button>
-    </div>
-</form>
+            {{-- Tombol Aksi --}}
+            <div class="flex items-center justify-between mt-12 pt-6 border-t border-white/10">
+                <a href="{{ route('positions.index') }}"
+                   class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition font-medium">
+                    <i class="fas fa-arrow-left"></i> Batal
+                </a>
+
+                <button type="submit"
+                        class="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 transition-all transform hover:scale-105">
+                    <i class="fas fa-save"></i> Simpan Perubahan
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+</style>
 @endsection

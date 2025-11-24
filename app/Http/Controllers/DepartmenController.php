@@ -12,7 +12,8 @@ class DepartmenController extends Controller
      */
     public function index()
     {
-        $departments = Department::latest()->paginate(5);
+        // Mengambil semua data (tanpa pagination agar tampilan grid bagus)
+        $departments = Department::latest()->get();
         return view('departments.index', compact('departments'));
     }
 
@@ -41,7 +42,9 @@ class DepartmenController extends Controller
      */
     public function show(string $id)
     {
-        $department = Department::find($id);
+        // 👇 PERBAIKAN DISINI: Gunakan 'with' untuk membawa data employees & jabatan
+        $department = Department::with(['employees.jabatan'])->findOrFail($id);
+        
         return view('departments.show', compact('department'));
     }
 
@@ -50,7 +53,7 @@ class DepartmenController extends Controller
      */
     public function edit(string $id)
     {
-        $department = Department::find($id);
+        $department = Department::findOrFail($id);
         return view('departments.edit', compact('department'));
     }
 
@@ -75,7 +78,7 @@ class DepartmenController extends Controller
      */
     public function destroy(string $id)
     {
-        $department = Department::find($id);
+        $department = Department::findOrFail($id);
         $department->delete();
         return redirect()->route('departments.index');
     }

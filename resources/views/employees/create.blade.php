@@ -1,111 +1,195 @@
 @extends('master')
 
 @section('title', 'Form Input Pegawai')
-@section('page-title', 'Tambah Pegawai')
+@section('page-title', 'Tambah Pegawai Baru')
 
 @section('content')
-<form action="{{ route('employees.store') }}" method="POST"
-      class="max-w-3xl mx-auto bg-white text-gray-800 p-6 rounded-lg shadow-md space-y-6 transition hover:shadow-lg">
-    @csrf
+<div class="max-w-5xl mx-auto">
+    <form action="{{ route('employees.store') }}" method="POST">
+        @csrf
 
-    <div>
-        <label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-user mr-1 text-indigo-600"></i> Nama Lengkap
-        </label>
-        <input type="text" id="nama_lengkap" name="nama_lengkap"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"
-               placeholder="Contoh: Kim Taehyung">
-    </div>
+        <div class="glass-panel rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+            {{-- Dekorasi Background --}}
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -z-10"></div>
 
-    <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-envelope mr-1 text-indigo-600"></i> Email
-        </label>
-        <input type="email" id="email" name="email"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"
-               placeholder="Contoh: taehyung@email.com">
-    </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                {{-- KOLOM KIRI: DATA PRIBADI --}}
+                <div class="space-y-5">
+                    <h3 class="text-lg font-semibold text-white border-b border-white/10 pb-2 mb-4 flex items-center gap-2">
+                        <i class="fas fa-user-circle text-indigo-400"></i> Data Pribadi
+                    </h3>
 
-    <div>
-        <label for="nomor_telepon" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-phone mr-1 text-indigo-600"></i> Nomor Telepon
-        </label>
-        <input type="text" id="nomor_telepon" name="nomor_telepon"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"
-               placeholder="Contoh: 081234567890">
-    </div>
+                    {{-- Nama Lengkap --}}
+                    <div>
+                        <label for="nama_lengkap" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                            Nama Lengkap
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-slate-500"></i>
+                            </div>
+                            <input type="text" id="nama_lengkap" name="nama_lengkap"
+                                   class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all"
+                                   placeholder="Masukkan nama lengkap" required>
+                        </div>
+                    </div>
 
-    <div>
-        <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-calendar-day mr-1 text-indigo-600"></i> Tanggal Lahir
-        </label>
-        <input type="date" id="tanggal_lahir" name="tanggal_lahir"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500">
-    </div>
+                    {{-- Grid untuk Email & No HP --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                Email
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-slate-500"></i>
+                                </div>
+                                <input type="email" id="email" name="email"
+                                       class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all"
+                                       placeholder="alamat@email.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="nomor_telepon" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                No. Telepon
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-slate-500"></i>
+                                </div>
+                                <input type="text" id="nomor_telepon" name="nomor_telepon"
+                                       class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all"
+                                       placeholder="0812..." required>
+                            </div>
+                        </div>
+                    </div>
 
-    <div>
-        <label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-map-marker-alt mr-1 text-indigo-600"></i> Alamat
-        </label>
-        <textarea id="alamat" name="alamat" rows="3"
-                  class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Contoh: Jl. Kenjeran No. 123, Surabaya"></textarea>
-    </div>
+                    {{-- Grid Tanggal Lahir --}}
+                    <div>
+                        <label for="tanggal_lahir" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                            Tanggal Lahir
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-calendar-day text-slate-500"></i>
+                            </div>
+                            <input type="date" id="tanggal_lahir" name="tanggal_lahir"
+                                   class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all" required>
+                        </div>
+                    </div>
 
-    <div>
-        <label for="tanggal_masuk" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-calendar-check mr-1 text-indigo-600"></i> Tanggal Masuk
-        </label>
-        <input type="date" id="tanggal_masuk" name="tanggal_masuk"
-               class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500">
-    </div>
+                    {{-- Alamat --}}
+                    <div>
+                        <label for="alamat" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                            Alamat Domisili
+                        </label>
+                        <textarea id="alamat" name="alamat" rows="3"
+                                  class="glass-input w-full rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 transition-all resize-none"
+                                  placeholder="Jl. Contoh No. 123..." required></textarea>
+                    </div>
+                </div>
 
-    <div>
-        <label for="departemen_id" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-building mr-1 text-indigo-600"></i> Departemen
-        </label>
-        <select name="departemen_id" id="departemen_id"
-                class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500">
-            <option value="" disabled selected>Pilih Departemen</option>
-            @foreach($departments as $dept)
-                <option value="{{ $dept->id }}">{{ $dept->nama_departemen }}</option>
-            @endforeach
-        </select>
-    </div>
+                {{-- KOLOM KANAN: DATA PEKERJAAN --}}
+                <div class="space-y-5">
+                    <h3 class="text-lg font-semibold text-white border-b border-white/10 pb-2 mb-4 flex items-center gap-2">
+                        <i class="fas fa-briefcase text-purple-400"></i> Data Kepegawaian
+                    </h3>
 
-    <div>
-        <label for="jabatan_id" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-user-tie mr-1 text-indigo-600"></i> Jabatan
-        </label>
-        <select name="jabatan_id" id="jabatan_id"
-                class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500">
-            <option value="" disabled selected>Pilih Jabatan</option>
-            @foreach($positions as $posisi)
-                <option value="{{ $posisi->id }}">{{ $posisi->nama_departemen }}</option>
-            @endforeach
-        </select>
-    </div>
+                    {{-- Tanggal Masuk --}}
+                    <div>
+                        <label for="tanggal_masuk" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                            Tanggal Masuk
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-calendar-check text-slate-500"></i>
+                            </div>
+                            <input type="date" id="tanggal_masuk" name="tanggal_masuk"
+                                   class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all" required>
+                        </div>
+                    </div>
 
-    <div>
-        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
-            <i class="fas fa-toggle-on mr-1 text-indigo-600"></i> Status
-        </label>
-        <select id="status" name="status"
-                class="block w-full rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500">
-            <option value="aktif">Aktif</option>
-            <option value="nonaktif">Nonaktif</option>
-        </select>
-    </div>
+                    {{-- Departemen & Jabatan --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="departemen_id" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                Departemen
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-building text-slate-500"></i>
+                                </div>
+                                <select name="departemen_id" id="departemen_id"
+                                        class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all appearance-none cursor-pointer bg-slate-900" required>
+                                    <option value="" disabled selected>Pilih...</option>
+                                    @foreach($departments as $dept)
+                                        <option value="{{ $dept->id }}" class="bg-slate-900 text-white">{{ $dept->nama_departemen }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-chevron-down text-xs text-slate-500"></i>
+                                </div>
+                            </div>
+                        </div>
 
-    <div class="flex justify-between items-center pt-4">
-        <a href="{{ route('employees.index') }}"
-           class="inline-flex items-center gap-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium rounded-md transition">
-            <i class="fas fa-arrow-left text-sm"></i> Batal
-        </a>
-        <button type="submit"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">
-            <i class="fas fa-save text-sm"></i> Simpan
-        </button>
-    </div>
-</form>
+                        <div>
+                            <label for="jabatan_id" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                Jabatan
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-id-badge text-slate-500"></i>
+                                </div>
+                                <select name="jabatan_id" id="jabatan_id"
+                                        class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all appearance-none cursor-pointer bg-slate-900" required>
+                                    <option value="" disabled selected>Pilih...</option>
+                                    @foreach($positions as $posisi)
+                                        <option value="{{ $posisi->id }}" class="bg-slate-900 text-white">{{ $posisi->nama_departemen }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-chevron-down text-xs text-slate-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Status --}}
+                    <div>
+                        <label for="status" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                            Status Pegawai
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-toggle-on text-slate-500"></i>
+                            </div>
+                            <select id="status" name="status"
+                                    class="glass-input w-full rounded-xl pl-11 py-3 focus:ring-2 focus:ring-indigo-500 transition-all appearance-none cursor-pointer bg-slate-900" required>
+                                <option value="aktif">Aktif</option>
+                                <option value="nonaktif">Nonaktif</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                <i class="fas fa-chevron-down text-xs text-slate-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Tombol Aksi --}}
+            <div class="flex justify-end items-center gap-4 mt-8 pt-6 border-t border-white/10">
+                <a href="{{ route('employees.index') }}"
+                   class="px-6 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition font-medium text-sm">
+                    Batal
+                </a>
+                <button type="submit"
+                        class="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all transform hover:scale-105 flex items-center gap-2">
+                    <i class="fas fa-save"></i> Simpan Pegawai
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 @endsection
